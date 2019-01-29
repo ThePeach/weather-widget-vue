@@ -1,4 +1,6 @@
 .editable-title {
+  text-align: right;
+
   &__title,
   input#{&}__input {
     font-size: font-size(1);

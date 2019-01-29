@@ -1,5 +1,6 @@
 .weather-data {
   display: grid;
+  grid-gap: $gap-small;
   grid-template-columns: 50% 50%;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas:
@@ -17,6 +18,7 @@
     font-size: font-size(4);
     color: $c-pink;
     grid-area: temp;
+    text-align: right;
 
     &::after {
       content: "ºC";

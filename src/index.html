@@ -4,9 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" type="text/css" href="/styles/main.scss" />
     <title>Document</title>
   </head>
   <body>
-    <main><ul class="weather-widget"></ul></main>
+    <main class="app">
+      <div class="weather-widget">
+        <div class="editable-title">
+          <h2 class="editable-title__title">Name of City, Country Code</h2>
+          <button
+            onClick="{this.makeTitleEditable}"
+            class="editable-title__button"
+          >
+            ×
+          </button>
+        </div>
+        <dl class="weather-data">
+          <dt class="weather-data__temp--label">Temperature</dt>
+          <dd class="weather-data__temp">15</dd>
+          <dt class="weather-data__conditions--label">Conditions</dt>
+          <dd class="weather-data__conditions">Rain</dd>
+          <dt class="weather-data__cloud--label">Cloud coverage</dt>
+          <dd class="weather-data__cloud">50%</dd>
+          <dt class="weather-data__wind--label">Wind</dt>
+          <dd class="weather-data__wind">5 m/s - 144º</dd>
+        </dl>
+      </div>
+    </main>
   </body>
 </html>
