@@ -3,12 +3,18 @@
   "version": "1.0.0",
   "description": "\"A Current Weather widget made with the help of Vue.js\"",
   "main": "index.js",
+  "private": true,
   "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel build index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Matteo Pescarin <peach@smartart.it>",
+  "author": "Matteo Pescarin",
   "license": "ISC",
   "dependencies": {
     "vue": "^2.5.22"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.11.0"
   }
 }
