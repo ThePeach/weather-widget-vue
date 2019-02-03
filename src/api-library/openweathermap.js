@@ -1,13 +1,11 @@
 import { encodeQueryParams } from "./utils";
 
-const APIKEY = process.env.REACT_APP_OPENWEATHERMAP_KEY;
-
 const location = {
   baseUrl: "https://api.openweathermap.org/data/2.5/",
-
+  APIKEY: process.env.OPENWEATHERMAP_KEY,
   currentConditions(city) {
     const params = {
-      APPID: APIKEY,
+      APPID: this.APIKEY,
       q: city,
       units: "metric"
     };

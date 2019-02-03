@@ -1,27 +1,30 @@
 <template>
-  <div v-if="isFetching" class="loader">Loading...</div>
-  <div v-else class="weather-widget">
+  <div class="weather-widget">
     <editable-title
       v-model="city.name"
       v-bind:defaultTitle="city.search"
       v-on:search-start="searchCity"
       placeholder="Search for location"
-    />
-    <dl class="weather-data">
+    ></editable-title>
+    <div v-if="isFetching" class="loader">Loading...</div>
+    <dl class="weather-data" v-if="weatherData.timestamp && !isFetching">
       <dt class="weather-data__temp--label">Temperature</dt>
-      <dd class="weather-data__temp">15</dd>
+      <dd class="weather-data__temp">{{weatherData.temperature.amount.toFixed(1)}}</dd>
       <dt class="weather-data__conditions--label">Conditions</dt>
-      <dd class="weather-data__conditions">Rain</dd>
+      <dd class="weather-data__conditions">{{weatherData.text}}</dd>
       <dt class="weather-data__cloud--label">Cloud coverage</dt>
-      <dd class="weather-data__cloud">50%</dd>
+      <dd class="weather-data__cloud">{{weatherData.coverage}}%</dd>
       <dt class="weather-data__wind--label">Wind</dt>
-      <dd class="weather-data__wind">5 m/s - 144º</dd>
+      <dd
+        class="weather-data__wind"
+      >{{weatherData.wind.speed}} m/s - {{weatherData.wind.direction}}º</dd>
     </dl>
   </div>
 </template>
 
 <script>
 import editableTitle from "../editable-title";
+import location from "../../api-library/openweathermap";
 
 export default {
   components: {
@@ -36,12 +39,39 @@ export default {
         contry: null
       },
       isFetching: false,
-      weatherData: null
+      weatherData: {
+        text: null,
+        timestamp: null,
+        coverage: null,
+        precipitation: null,
+        temperature: {
+          amount: null
+        },
+        wind: {
+          speed: null,
+          direction: null
+        }
+      }
     };
   },
   methods: {
     searchCity(city) {
-      console.log(city);
+      this.isFetching = true;
+      location.currentConditions(city).then(data => {
+        this.isFetching = false;
+        this.city = {
+          ...data.city,
+          search: city
+        };
+        this.weatherData = {
+          text: data.text,
+          timestamp: data.timestamp,
+          coverage: data.coverage,
+          precipitation: data.precipitation,
+          temperature: data.temperature,
+          wind: data.wind
+        };
+      });
     }
   }
 };
