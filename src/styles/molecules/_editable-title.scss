@@ -14,6 +14,7 @@
   &__input {
     border: $border-thickness dashed $c-blue-dark;
     background-color: $c-blue-light;
+    text-align: right;
   }
 
   &__input::selection {
