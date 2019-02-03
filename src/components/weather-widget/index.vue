@@ -1,10 +1,11 @@
 <template>
   <div v-if="isFetching" class="loader">Loading...</div>
   <div v-else class="weather-widget">
-    <div class="editable-title">
-      <h2 class="editable-title__title">Name of City, Country Code</h2>
-      <button onClick="{this.makeTitleEditable}" class="editable-title__button">×</button>
-    </div>
+    <editable-title
+      v-model="city.name"
+      v-bind:defaultTitle="city.search"
+      placeholder="Search for location"
+    />
     <dl class="weather-data">
       <dt class="weather-data__temp--label">Temperature</dt>
       <dd class="weather-data__temp">15</dd>
@@ -19,11 +20,16 @@
 </template>
 
 <script>
+import editableTitle from "../editable-title";
+
 export default {
+  components: {
+    "editable-title": editableTitle
+  },
   data: function() {
     return {
       city: {
-        search: null,
+        search: "London",
         id: null,
         name: null,
         contry: null
@@ -31,6 +37,11 @@ export default {
       isFetching: false,
       weatherData: null
     };
+  },
+  methods: {
+    searchCity(event) {
+      console.log(event);
+    }
   }
 };
 </script>
