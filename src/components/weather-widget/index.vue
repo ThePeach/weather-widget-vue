@@ -4,6 +4,7 @@
     <editable-title
       v-model="city.name"
       v-bind:defaultTitle="city.search"
+      v-on:search-start="searchCity"
       placeholder="Search for location"
     />
     <dl class="weather-data">
@@ -39,8 +40,8 @@ export default {
     };
   },
   methods: {
-    searchCity(event) {
-      console.log(event);
+    searchCity(city) {
+      console.log(city);
     }
   }
 };

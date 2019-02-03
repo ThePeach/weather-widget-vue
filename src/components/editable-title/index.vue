@@ -1,7 +1,7 @@
 <template>
   <div class="editable-title">
-    <form v-if="isEditable" v-on:submit.prevent>
-      <input type="text" v-model="title" class="editable-title__input" id="key">
+    <form v-if="isEditable" v-on:submit.prevent="emitSearch">
+      <input type="text" v-model="title" class="editable-title__input" id="title__input">
       <button v-on:click="isEditable = false" class="editable-title__button">Search</button>
     </form>
     <div v-else>
@@ -27,6 +27,9 @@ export default {
   methods: {
     makeEditable(event) {
       this.isEditable = true;
+    },
+    emitSearch(event) {
+      this.$emit("search-start", event.target.title__input.value);
     }
   }
 };
