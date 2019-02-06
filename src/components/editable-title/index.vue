@@ -29,7 +29,7 @@ export default {
       this.isEditable = true;
     },
     emitSearch(event) {
-      this.$emit("search-start", event.target.title__input.value);
+      this.$emit("search-start", this.title);
     }
   }
 };
