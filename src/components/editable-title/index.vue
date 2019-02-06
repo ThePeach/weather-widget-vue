@@ -1,7 +1,7 @@
 <template>
   <div class="editable-title">
     <form v-if="isEditable" v-on:submit.prevent="emitSearch">
-      <input type="text" v-model="title" class="editable-title__input" id="title__input">
+      <input type="text" v-model="internalTitle" class="editable-title__input" id="title__input">
       <button v-on:click="toggleEditable" class="editable-title__button">Search</button>
     </form>
     <div v-else>
@@ -19,7 +19,8 @@ export default {
   },
   data: function() {
     return {
-      isEditable: false
+      isEditable: false,
+      internalTitle: this.title
     };
   },
   methods: {
@@ -27,7 +28,7 @@ export default {
       this.isEditable = !this.isEditable;
     },
     emitSearch(event) {
-      this.$emit("search-start", this.title);
+      this.$emit("search-start", this.internalTitle);
     }
   }
 };
