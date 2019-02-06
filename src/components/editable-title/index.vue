@@ -2,31 +2,29 @@
   <div class="editable-title">
     <form v-if="isEditable" v-on:submit.prevent="emitSearch">
       <input type="text" v-model="title" class="editable-title__input" id="title__input">
-      <button v-on:click="isEditable = false" class="editable-title__button">Search</button>
+      <button v-on:click="toggleEditable" class="editable-title__button">Search</button>
     </form>
     <div v-else>
-      <h2 class="editable-title__title" v-on:click="makeEditable">{{ title }}</h2>
-      <button v-on:click="makeEditable" class="editable-title__button">×</button>
+      <h2 class="editable-title__title" v-on:click="toggleEditable">{{ title }}</h2>
+      <button v-on:click="toggleEditable" class="editable-title__button">×</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  model: {
-    prop: "title",
-    event: "change"
+  props: {
+    title: String,
+    placeholder: String
   },
-  props: { defaultTitle: String, placeholder: String },
   data: function() {
     return {
-      isEditable: false,
-      title: this.defaultTitle
+      isEditable: false
     };
   },
   methods: {
-    makeEditable(event) {
-      this.isEditable = true;
+    toggleEditable() {
+      this.isEditable = !this.isEditable;
     },
     emitSearch(event) {
       this.$emit("search-start", this.title);

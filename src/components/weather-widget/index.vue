@@ -1,8 +1,7 @@
 <template>
   <div class="weather-widget">
     <editable-title
-      v-model="city.name"
-      v-bind:defaultTitle="city.search"
+      :title="cityWithCountry"
       v-on:search-start="searchCity"
       placeholder="Search for location"
     ></editable-title>
@@ -54,6 +53,13 @@ export default {
       }
     };
   },
+  computed: {
+    cityWithCountry() {
+      return this.city.name && this.city.country
+        ? this.city.name + ", " + this.city.country
+        : this.city.search;
+    }
+  },
   methods: {
     searchCity(city) {
       this.isFetching = true;
@@ -71,6 +77,7 @@ export default {
           temperature: data.temperature,
           wind: data.wind
         };
+        this.fullname = this.cityWithCountry;
       });
     }
   }
